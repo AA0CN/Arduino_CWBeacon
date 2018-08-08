@@ -23,6 +23,8 @@
 #define ROWS 3
 #define COLS 80
 #define MESSAGE_LEN (ROWS*COLS)
+#define CHAR_BUFF 8
+
 char current_status[COLS];
 
 typedef struct {
@@ -31,7 +33,7 @@ typedef struct {
   bool tx_relay;
   uint32_t intermessage_pause;
   uint32_t wpm_rate;
-  char message[MESSAGE_LEN];  
+  char message[MESSAGE_LEN];
 } beacon_config_t;
 
 beacon_config_t config_in_ram;
@@ -310,13 +312,13 @@ char s_getchar(){
 // s_get_int: Get Integer from Serial, within limits.
 //
 int s_get_int(const char * message, int min_val, int max_val){
-  char buff[5];
+  char buff[CHAR_BUFF];
   int temp = -1;
   int numchars = 0;
   char charin = 0;
   double power = 0;
 
-  memset(buff, 0, 5);
+  memset(buff, 0, CHAR_BUFF);
 
   // Only return from here when acceptable int taken in.
   while (temp == -1){
@@ -337,7 +339,7 @@ int s_get_int(const char * message, int min_val, int max_val){
       // Evaluate the char input.
       // If it's a number, and not off the end, store it.
       if(charin >= '0' && charin <= '9') {
-        if (numchars < 5) {
+        if (numchars < CHAR_BUFF) {
           buff[numchars] = charin;
           numchars++;
         }
@@ -368,10 +370,10 @@ int s_get_int(const char * message, int min_val, int max_val){
 
     // Enter hit. Calculate buffer if any:
     if(numchars > 0){
-      temp = 0;    
+      temp = 0;
       for(int i = numchars-1; i >= 0; i--){
         // Calculate by nth place: ...100s, 10s, 1s...
-        power = pow(10, ((numchars-1)-i)) + 0.5; // 0.5 is ugly hack because POW doesn't paly well with ints.
+        power = pow(10, ((numchars-1)-i)) + 0.5; // 0.5 is ugly hack because POW doesn't play well with ints.
         temp = temp + ( ((int)(buff[i] - '0')) * (int) power );
       }
       if ((temp < min_val) || (temp > max_val)){
@@ -379,7 +381,7 @@ int s_get_int(const char * message, int min_val, int max_val){
         charin = 0;
         // Reset buffet, reject
         numchars = 0;
-        memset(buff, 0, 5);        
+        memset(buff, 0, CHAR_BUFF);
       }
     }
     else {
@@ -390,6 +392,7 @@ int s_get_int(const char * message, int min_val, int max_val){
   }
   return temp;
 }
+
 
 //
 // print_options: Print Config Mode to screen
@@ -552,12 +555,12 @@ void setup() {
   config_in_ram.wpm_rate = 10;
   config_in_ram.tx_relay = true;
   memset(config_in_ram.message, 0, MESSAGE_LEN);
-  sprintf(config_in_ram.message, "VVV"); 
+  sprintf(config_in_ram.message, "VVV");
 
   // initialize serial communications at 9600 bps:
-  Serial.begin(9600); 
+  Serial.begin(9600);
   clear_screen();
-  Serial.print(" "); 
+  Serial.print(" ");
   Serial.print(SEPERATOR);
   Serial.print(NEWLINE);
   Serial.print(F("- - -   AA0CN CW BEACON    - - -"));
