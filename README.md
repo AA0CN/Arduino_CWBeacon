@@ -18,7 +18,7 @@ An Arduino Uno, Nano, or Similar Atmel Atmega328-based processor can be used.
 Code could be ported to other platforms.
 For Arduino-type devices, TLL-Level output pins can be used to drive PC817 Optocouplers
 through 330 Ohm resistors like so:
-
+```
 OUTPUT PIN ----
               |
               |
@@ -33,22 +33,22 @@ OUTPUT PIN ----
  --+--  
   -+- GND
    +
-   
->>> The message will be displated as transmitted Dits/Dahs and the ASCII character in the 
+```
+The message will be displated as transmitted Dits/Dahs and the ASCII character in the 
 Serial output, as well as the LED on Arduino devices (unless otherwise modified)
 
->>> At Power On, the device will start automatically with the previous
+At Power On, the device will start automatically with the previous
 default configuration (if saved to EEPROM)
->>> The User/Controller may modify the configuration or monitor the
+The User/Controller may modify the configuration or monitor the
 operation of the CW Beacon via a Serial Port/UART, with the following
 configuration: 9600 Baud, 8 Data Bits, 1 Stop Bit, No Pairity.
->>> On Reset or Power On, the following information will be displayed
+On Reset or Power On, the following information will be displayed
 from EEPROM/Default and keying will start automatically.
 
->>> On first load, EEPROM restore will not find a saved configuration.
+On first load, EEPROM restore will not find a saved configuration.
 If no previous EEPROM configuration is set, the default configuration
 of a fresh install is a 10WPM message of 'VVV', every 5 seconds.
-
+```
 --------------------------------
 - - -   AA0CN CW BEACON    - - -
 --------------------------------
@@ -71,17 +71,17 @@ T : -
 E : .
 S : ...
 T : -
+```
 
-
->>> Pressing [ENTER] will enter Configuration Mode. This is the user interface
-where the user may change the current configuration and save or restore from EEPROM.
->>> Pressing 'D' or [ENTER] will return to Run mode
->>> Pressing 'S' will save the current configuration as Default in EEPROM
->>> Pressing 'T' will toggle the TX/PTT Relay on Pin 3 (as well as its inverse)
->>> Pressing 'W' allows the User to change the WPM rate of CW keying
->>> Pressing 'I' allows the User to change the intermessage delay, in seconds. (min, 1, max 32767)
->>> Pressing 'E' allows the User to set a new message, to a max of 239 characters
-
+Pressing 'ENTER' will enter Configuration Mode. This is the user interface
+the user may change the current configuration and save or restore from EEPROM.
+Pressing 'D' or 'ENTER' will return to Run mode
+Pressing 'S' will save the current configuration as Default in EEPROM
+Pressing 'T' will toggle the TX/PTT Relay on Pin 3 (as well as its inverse)
+Pressing 'W' allows the User to change the WPM rate of CW keying
+Pressing 'I' allows the User to change the intermessage delay, in seconds. (min, 1, max 32767)
+Pressing 'E' allows the User to set a new message, to a max of 239 characters
+```
 === Config Mode ===
 (D) Done (or Enter)
 (S) Save as Default
@@ -91,13 +91,13 @@ where the user may change the current configuration and save or restore from EEP
 (E) Edit Message :
 CQ TEST CQ TEST DE AA0CN AA0CN K
 ================================================================================
+```
 
 
 
-
->>> When in Run mode, pressing 'P' will Pause TX and also display Pin info
->>> Pin info is set by compile-time #defines at the top of cw_beacon.ino
-
+When in Run mode, pressing 'P' will Pause TX and also display Pin info
+Pin info is set by compile-time #defines at the top of cw_beacon.ino
+```
 - - -  Version 1.00, 2017  - - -
   OUT:         PIN D2
   OUT Inverse: PIN D7
@@ -106,8 +106,8 @@ CQ TEST CQ TEST DE AA0CN AA0CN K
 --------------------------------
 
 Press any key to continue...
-
->>> Pressing any key will return to Run mode.
+```
+Pressing any key will return to Run mode.
 
 
 
