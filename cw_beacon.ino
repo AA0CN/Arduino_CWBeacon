@@ -45,9 +45,11 @@ void eeprom_update(int address, char value)
   }
 }
 
-//
-// strlen: String Length, works for null-terminated strings
-//
+/*
+ * @name strlen
+ * @brief String Length, works for null-terminated strings.
+ * @return Returns the length of string.
+ */
 int strlen(char* a)
 {
   int ret = 0;
