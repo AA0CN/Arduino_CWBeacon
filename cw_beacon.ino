@@ -47,8 +47,8 @@ void eeprom_update(int address, char value)
 
 /*
  * @name strlen
- * @brief String Length, works for null-terminated strings
- * @return Returns the length of string .
+ * @brief String Length, works for null-terminated strings.
+ * @return Returns the length of string.
  */
 int strlen(char* a)
 {
