@@ -95,11 +95,12 @@ unsigned int wpm_to_dit_ms(int wpm, int dits){
 
 //
 // Output semaphore to output pin: blocking.
+// Return: 0 if success, -1 if serial overflow.
 //
 int semaphore_to_output(const char * semaphore, int out_pin){
   int i = 0;
   int escape = 0;
-  while ( (semaphore[i] != 0) ) { // Null terminated strings
+  while ( (semaphore[i] != 0) && (escsape == 0) ) { // Null terminated strings
   
     if (Serial.available() > 0){
       escape = -1;
@@ -149,13 +150,13 @@ int semaphore_to_output(const char * semaphore, int out_pin){
   Serial.print(NEWLINE);
 
   // Inter-charachter pause, three dits
-    if (Serial.available() > 0){
-      escape = -1;
-    } else {
-      delay(wpm_to_dit_ms(config_in_ram.wpm_rate, 3));
-    }
+  if ((Serial.available() > 0) && (escape == 0)){
+    escape = -1;
+  } else {
+    delay(wpm_to_dit_ms(config_in_ram.wpm_rate, 3));
+  }
       
-  return 0;
+  return escape;
 }
 
 //
