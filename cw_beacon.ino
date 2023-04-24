@@ -100,7 +100,7 @@ unsigned int wpm_to_dit_ms(int wpm, int dits){
 int semaphore_to_output(const char * semaphore, int out_pin){
   int i = 0;
   int escape = 0;
-  while ( (semaphore[i] != 0) && (escsape == 0) ) { // Null terminated strings
+  while ( (semaphore[i] != 0) && (escape == 0) ) { // Null terminated strings
   
     if (Serial.available() > 0){
       escape = -1;
